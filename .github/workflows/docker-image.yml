@@ -36,6 +36,6 @@ jobs:
          port: 22
          script: |
           # Commands to execute on the VM after SSH connection
-          docker stop my-container || true
-          docker rm my-container || true
-          docker run -d --name my-container -p 8080:80 yashwanthkumar1999/azure-be-ga:latest
+          sudo docker stop my-container || true
+          sudo docker rm my-container || true
+          sudo docker run -d --name my-container -p 8080:80 yashwanthkumar1999/azure-be-ga:latest
