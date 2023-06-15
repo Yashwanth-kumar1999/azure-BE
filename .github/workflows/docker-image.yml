@@ -27,15 +27,15 @@ jobs:
         with:
           push: true
           tags: yashwanthkumar1999/azure-be-ga:latest
-      -
-        name: Publish to Azure VM
-        uses: Azure/docker-login@v1
+      - name: Deploy to VM
+        uses: appleboy/ssh-action@master
         with:
-          login-server: 40.87.66.250
-          username: demo
-          password: ${{ secrets.VM_PASSWORD }}
-      -
-        name: Deploy to Tomcat
-        run: |
-          docker pull yashwanthkumar1999/azure-be-ga:latest
-          docker run -d -p 8080:8080 --name myapp yashwanthkumar1999/azure-be-ga:latest
+         host: 20.166.35.113
+         username: demo
+         password: ${{ secrets.VM_PASSWORD }} 
+         port: 22
+         script: |
+          # Commands to execute on the VM after SSH connection
+          docker stop my-container || true
+          docker rm my-container || true
+          docker run -d --name my-container -p 8080:80 yashwanthkumar1999/azure-be-ga:latest
