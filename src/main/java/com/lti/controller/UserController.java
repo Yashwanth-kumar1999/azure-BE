@@ -48,7 +48,10 @@ import com.lti.service.UserService;
 @RestController
 @CrossOrigin
 public class UserController {
-
+	@GetMapping(path = "/")
+	public String helloWorld() {
+		return "{\"message\":\"your application is running v1\"}";
+	}
 	@Autowired
 	private UserService userService;
 
